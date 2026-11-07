@@ -1,11 +1,4 @@
 import app from './app.js';
-import appPlugin, { options } from './app.js';
-
-const app = Fastify({
-    logger: true
-});
-
-await app.register(appPlugin, opts);
 
 try {
     const port = process.env.PORT || 3000;

@@ -9,12 +9,6 @@ async function authPlugin (app, opts) {
             reply.code(401);
             throw new Error('Invalid API key');
         }
-    app.addHook('onRoute', function hook (routeOptions) {
-        if (routeOptions.config?.auth === true) {
-            routeOptions.onRequest =
-            [app.authOnlyChef].concat(RouteOptions.onRequest || []);
-        }
-    })
     });
 }
 
