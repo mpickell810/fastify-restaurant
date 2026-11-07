@@ -32,8 +32,11 @@ function recipesPlugin (app, opts, next) {
                 reply.send(new Error('Not implemented'));
             }
     });
-})};
+});
+
 next();
+}
+
 
 async function menuHandler (request, reply) {
     this.log.info('Logging GET /menu from this');
