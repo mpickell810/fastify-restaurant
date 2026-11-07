@@ -37,11 +37,9 @@ function recipesPlugin (app, opts, next) {
 next();
 }
 
-
 async function menuHandler (request, reply) {
-    this.log.info('Logging GET /menu from this');
-    request.log.info('Logging GET /menu from request');
-    throw new Error('Not implemented');
+    const recipes = await this.source.readRecipes();
+    return recipes;
 }
 
 export default recipesPlugin;
