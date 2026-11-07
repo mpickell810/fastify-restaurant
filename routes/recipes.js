@@ -21,23 +21,24 @@ function recipesPlugin (app, opts, next) {
                     price,
                     createAt: new Date()
                 });
-            reply.code(201);
-            return { id: newPlateId };
+                reply.code(201);
+                return { id: newPlateId };
             }
         });
+
         app.delete('/recipes/:id', {
             config: { auth: true },
             handler: function removeFromMenu (request, reply) {
                 reply.send(new Error('Not implemented'));
             }
     });
+})};
 next();
-});
 
 async function menuHandler (request, reply) {
     this.log.info('Logging GET /menu from this');
     request.log.info('Logging GET /menu from request');
     throw new Error('Not implemented');
 }
-}
+
 export default recipesPlugin;
