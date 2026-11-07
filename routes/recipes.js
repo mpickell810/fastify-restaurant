@@ -4,7 +4,7 @@ function recipesPlugin (app, opts, next) {
     
     app.register(async function protectRoutesPlugin (app, opts) {
         app.addHook('onRequest', async function (request, reply) {
-            if (reply.context.config.auth) {
+            if (request.routeOptions?.config?.auth) {
                 await app.authOnlyChef(request, reply);
             }
         });
