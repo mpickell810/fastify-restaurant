@@ -5,7 +5,12 @@ import recipesPlugin from './routes/recipes.js';
 import ordersPlugin from './routes/orders.js';
 
 const serverOptions = {
-    logger: true
+    logger: true,
+    ajv: {
+        customOptions: {
+            allErrors: true
+        }
+    }
 };
 
 const app = Fastify(serverOptions);

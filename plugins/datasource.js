@@ -22,7 +22,12 @@ async function datasourcePlugin (app, opts) {
             const result = await collection.find(filters).sort(sort).toArray();
             return result;
         },
-        async deleteRecipe (recipeId) { /* todo */ },
+        async deleteRecipe (recipeId) {
+            const { db, ObjectId } = app.mongo;
+            const collection = db.collection('menu');
+            const result = await collection.deleteOne({ _id: new ObjectId(recipeId) });
+            return result.deleteCount;
+        },
         async insertOrder (order) { /* todo */ },
         async readOrders (filters, sort) { /* todo */ },
         async markOrdersAsDone (orderId) { /* todo */ }
