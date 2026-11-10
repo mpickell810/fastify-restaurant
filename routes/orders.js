@@ -28,13 +28,10 @@ async function ordersPlugin (app, ots) {
                     properties: {
                         id: { type: 'string' }
                     },
-                    required : ['id']
+                    required: ['id']
                 }
             }
-        }
-    }, async (request, reply) => {
-        const order = request.body;
-    
+        },
         handler: async function createOrder (request, reply) {
             const order = {
                 status: 'pending',
@@ -103,7 +100,7 @@ async function ordersPlugin (app, ots) {
                 }
             }
         },
-        handler: async function markOrderAsDone (request, repy) {
+        handler: async function markOrderAsDone (request, reply) {
             const orderId = request.params.orderId;
             const modifiedCount = await this.source.markOrderAsDone(orderId);
             if (modifiedCount === 0) {
@@ -115,7 +112,5 @@ async function ordersPlugin (app, ots) {
         }
     });
 }
-
-
 
 export default ordersPlugin;

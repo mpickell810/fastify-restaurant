@@ -34,6 +34,7 @@ async function datasourcePlugin (app, opts) {
             order.id = _id.toString();
             const collection = app.mongo.db.collection('orders');
             const result = await collection.insertOne({
+                ...order,
                 itemType: 'order',
                 status: 'pending',
                 createdAt: new Date()   
