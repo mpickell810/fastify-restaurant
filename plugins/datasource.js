@@ -28,8 +28,21 @@ async function datasourcePlugin (app, opts) {
             const result = await collection.deleteOne({ _id: new ObjectId(recipeId) });
             return result.deleteCount;
         },
-        async insertOrder (order) { /* todo */ },
-        async readOrders (filters, sort) { /* todo */ },
+        async insertOrder (order) {
+            const _id = new app.mongo.ObjectId();
+            order._id = _id;
+            order.id = _id.toString();
+            const collection = app.mongo.db.collection('orders');
+            const result = await collection.insertOne({
+                itemType: 'order',
+                status: 'pending',
+                createdAt: new Date()   
+            });
+            return result.insertedId;
+        },
+        async readOrders (filters, sort) {
+
+        },
         async markOrdersAsDone (orderId) { /* todo */ }
     });
 }
