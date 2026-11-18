@@ -4,7 +4,7 @@ import fastifyMongo from '@fastify/mongodb';
 async function datasourcePlugin (app, opts) {
     app.log.info('Connecting to MongoDB')
     await app.register(fastifyMongo, {
-        url: 'mongodb://localhost:27017/restaurant' 
+        url: opts.databaseUrl 
     });
     app.decorate('source', {
         async insertRecipe (recipe) {

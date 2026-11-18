@@ -73,7 +73,7 @@ async function ordersPlugin (app, ots) {
             }
         },
         handler: async function readOrders (request, reply) {
-            const orders = await this.source.readOrders({ status: 'pending' });
+            const orders = (await this.source.readOrders({ status: 'pending' })) ?? [];
             
             const recipesIds =orders.flatMap(order => order.items.map(item => item.id));
             const recipes = await this.source.readRecipes({ id: { $in: recipesIds } });
@@ -81,7 +81,7 @@ async function ordersPlugin (app, ots) {
             return orders.map(order => {
                 order.items = order.items.map(item =>  {
                     const recipe = recipes.find(recipe => recipe.id === item.id);
-                    return recipe ? { ...recipe, quantity: item.quanity } : undefined;
+                    return recipe ? { ...recipe, quantity: item.quantity } : undefined;
                 })
                 .filter(recipe => recipe !== undefined);
                 return order;
